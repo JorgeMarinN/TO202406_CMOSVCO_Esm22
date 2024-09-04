@@ -1,0 +1,3 @@
+.measure tran trise 
++ TRIG v(z[6]) TD=10.5n VAL=0.1 RISE=1
++ TARG v(z[6]) TD=10.5n VAL=1.7 RISE=1
