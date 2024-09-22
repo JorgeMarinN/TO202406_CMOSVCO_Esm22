@@ -96,7 +96,7 @@ lab=VH}
 N 1885 -600 1925 -600 {
 lab=D1}
 N 1365 -620 1395 -620 {
-lab=DOUT}
+lab=VCP}
 N 1545 -590 1585 -590 {
 lab=VSS}
 N 1585 -600 1585 -590 {
@@ -130,61 +130,41 @@ lab=VDD}
 N 1460 -620 1585 -620 {
 lab=DOUT_D1}
 N 1365 -210 1395 -210 {
-lab=DOUT}
+lab=VCN}
 N 1430 -180 1430 -150 {
 lab=VSS}
 N 1430 -270 1430 -240 {
 lab=VDD}
 N 1460 -210 1585 -210 {
 lab=DOUT_D1_N}
-N 2780 -1135 2820 -1135 {
+N 2310 -1135 2350 -1135 {
 lab=V_1r_buff_sp}
-N 2780 -1095 2820 -1095 {
+N 2310 -1095 2350 -1095 {
 lab=V_1s_buff_sp}
-N 3120 -1115 3160 -1115 {
+N 2650 -1115 2690 -1115 {
 lab=DOUT}
-N 2315 -1290 2355 -1290 {
-lab=V_1s_dl}
-N 2315 -970 2355 -970 {
+N 1845 -1290 1885 -1290 {
+lab=V_1s_buff}
+N 1845 -970 1885 -970 {
 lab=V_1r_buff}
-N 2475 -1380 2475 -1350 {
+N 2005 -1380 2005 -1350 {
 lab=VDD}
-N 2475 -1060 2475 -1030 {
+N 2005 -1060 2005 -1030 {
 lab=VDD}
-N 2475 -1230 2475 -1200 {
+N 2005 -1230 2005 -1200 {
 lab=VSS}
-N 2475 -910 2475 -880 {
+N 2005 -910 2005 -880 {
 lab=VSS}
-N 2595 -1270 2640 -1270 {
+N 2125 -1270 2170 -1270 {
 lab=V_1s_buff_sp}
-N 2595 -950 2640 -950 {
+N 2125 -950 2170 -950 {
 lab=V_1r_buff_sp}
-N 2970 -1215 2970 -1185 {
+N 2500 -1215 2500 -1185 {
 lab=VDD}
-N 2970 -1045 2970 -1015 {
+N 2500 -1045 2500 -1015 {
 lab=VSS}
-N 1310 -950 1500 -950 {
-lab=VCONTr}
-N 1310 -890 1310 -860 {
-lab=VSS}
-N 2200 -1290 2240 -1290 {
-lab=V_1s_dl}
-N 2170 -1260 2170 -1230 {
-lab=VSS}
-N 2170 -1350 2170 -1320 {
-lab=VDD}
-N 2095 -1290 2135 -1290 {
-lab=#net4}
-N 1685 -1535 1685 -1515 { lab=GND}
-N 1685 -1645 1685 -1595 { lab=VCC}
-N 2205 -970 2245 -970 {
-lab=V_1r_dl}
-N 2175 -940 2175 -910 {
-lab=VSS}
-N 2175 -1030 2175 -1000 {
-lab=VDD}
-N 2100 -970 2140 -970 {
-lab=#net5}
+N 2690 -1115 2715 -1115 {
+lab=DOUT}
 C {devices/code.sym} 3250 -1200 0 0 {name=TT_MODELS
 only_toplevel=true
 format="tcleval(@value )"
@@ -207,13 +187,15 @@ C {devices/code_shown.sym} 3240 -1020 0 0 {name=s1 only_toplevel=false value=".p
 *.param RL = 104
 *14mA
 *.param RL = 208
+*LATEST TDBuckLOADS 
 .param RL = 300
+*.param RL = 30
 *197mA
 *.param RL = 13
-.save v(ldo_out) v(v_res) v(D1) v(D1_N) v(DOUT) v(VCONTr) v(VCONTs) v(V_1r_buff) v(V_1s_buff) v(V_1r_buff_sp) v(V_1s_buff_sp) v(DOUT) i(v5) i(v_res) v(VCONTs_OL)
+.save v(ldo_out) v(v_res) v(D1) v(D1_N) v(DOUT) v(VCONTr) v(VCONTs) v(V_1r_buff) v(V_1s_buff) v(V_1r_buff_sp) v(V_1s_buff_sp) v(DOUT) i(v5) i(v_res) v(VCONTs_OL) v(vcp) v(vcn)
 vvdd vdd 0 dc 3.3
 vvss vss 0 0
-*vvcontr VCONTr 0 dc 1.1
+vvcontr VCONTr 0 dc 1.1
 *vvconts VCONTs 0 dc 1.09
 *.option temp = 200
 .ic v(VCONTs) = 1.1
@@ -221,13 +203,13 @@ vvss vss 0 0
 .ic v(V_2s) = 3.3
 .ic v(V_1r) = 3.3
 .ic v(V_2r) = 0
-.ic v(ldo_out) = 2.2
-.ic v(V_res) = 2.2
-.ic v(V_inductor) = 2.2
+.ic v(ldo_out) = 1.61
+.ic v(V_res) = 1.61
+.ic v(V_inductor) = 1.61
 
 .control
 *tran 2n 1m
-tran 4n 1m
+tran 4n 40u
 *wrdata /foss/designs/TO202406_CMOSVCO_Esm22/xschem/data/dataVSENS_2xCMOSVCOnDFF_v1p1.txt v(V_1s) tran1.v(V_1s) tran2.v(V_1s) tran3.v(V_1s) tran4.v(V_1s) tran5.v(V_1s) tran6.v(V_1s) tran7.v(V_1s) tran8.v(V_1s) tran9.v(V_1s) tran10.v(V_1s) tran11.v(V_1s) tran12.v(V_1s) tran13.v(V_1s) tran14.v(V_1s) tran15.v(V_1s) tran16.v(V_1s) tran17.v(V_1s) tran18.v(V_1s) tran19.v(V_1s)
 plot v(ldo_out)
 plot v(v_res)
@@ -342,9 +324,6 @@ device=resistor
 m=1}
 C {devices/vsource.sym} 2860 -350 0 0 {name=Vldo_out value=0}
 C {devices/gnd.sym} 2860 -160 0 0 {name=l52 lab=GND}
-C {devices/lab_pin.sym} 2860 -420 2 0 {name=p24 sig_type=std_logic lab=ldo_out
-
-}
 C {devices/lab_pin.sym} 2860 -420 2 0 {name=p25 sig_type=std_logic lab=ldo_out
 
 }
@@ -359,59 +338,38 @@ footprint=1206
 device=resistor
 m=1}
 C {devices/gnd.sym} 3080 -140 0 0 {name=l3 lab=GND}
-C {devices/lab_pin.sym} 3080 -400 2 0 {name=p26 sig_type=std_logic lab=ldo_out
-
-}
 C {devices/lab_pin.sym} 3080 -400 2 0 {name=p27 sig_type=std_logic lab=ldo_out
 
 }
 C {devices/lab_pin.sym} 3080 -265 2 0 {name=p28 sig_type=std_logic lab=VCONTs}
-C {devices/lab_pin.sym} 1365 -620 0 0 {name=p30 sig_type=std_logic lab=DOUT}
 C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/BUFFMIN_v1p2.sym} 1355 -620 0 0 {name=X6}
 C {devices/lab_pin.sym} 1430 -560 3 0 {name=p33 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 1430 -680 1 0 {name=p34 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} 1485 -620 1 0 {name=p31 sig_type=std_logic lab=DOUT_D1}
-C {devices/lab_pin.sym} 1365 -210 0 0 {name=p29 sig_type=std_logic lab=DOUT}
 C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/BUFFMIN_v1p2.sym} 1355 -210 0 0 {name=X7}
 C {devices/lab_pin.sym} 1430 -150 3 0 {name=p32 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 1430 -270 1 0 {name=p35 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} 1485 -210 1 0 {name=p36 sig_type=std_logic lab=DOUT_D1_N}
-C {devices/lab_pin.sym} 2780 -1095 1 0 {name=p37 sig_type=std_logic lab=V_1s_buff_sp}
-C {devices/lab_pin.sym} 2810 -1135 1 0 {name=p38 sig_type=std_logic lab=V_1r_buff_sp}
-C {devices/lab_pin.sym} 3160 -1115 1 0 {name=p39 sig_type=std_logic lab=DOUT}
-C {devices/lab_pin.sym} 2640 -1270 1 0 {name=p40 sig_type=std_logic lab=V_1s_buff_sp}
-C {devices/lab_pin.sym} 2640 -950 1 0 {name=p41 sig_type=std_logic lab=V_1r_buff_sp}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/short_pulse_generator.sym} 2475 -970 0 0 {name=x8}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/short_pulse_generator.sym} 2475 -1290 0 0 {name=x9}
-C {devices/lab_pin.sym} 2475 -1380 1 0 {name=p42 sig_type=std_logic lab=VDD}
-C {devices/lab_pin.sym} 2475 -1060 1 0 {name=p43 sig_type=std_logic lab=VDD}
-C {devices/lab_pin.sym} 2475 -1200 3 0 {name=p44 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2475 -880 3 0 {name=p45 sig_type=std_logic lab=VSS}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/SRlatch_NOR.sym} 2970 -1115 0 0 {name=x10}
-C {devices/lab_pin.sym} 2970 -1215 1 0 {name=p46 sig_type=std_logic lab=VDD}
-C {devices/lab_pin.sym} 2970 -1015 3 0 {name=p47 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2340 -970 1 0 {name=p48 sig_type=std_logic lab=V_1r_buff}
-C {devices/lab_pin.sym} 2335 -1290 1 0 {name=p49 sig_type=std_logic lab=V_1s_dl}
-C {devices/vsource.sym} 1310 -920 0 0 {name=V2 value="pulse 1.1 0.9 499u 1u 1u 498u 1m"}
-C {devices/lab_pin.sym} 1310 -860 3 0 {name=p11 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2220 -1290 1 0 {name=p12 sig_type=std_logic lab=V_1s_dl}
-C {devices/lab_pin.sym} 2025 -1240 0 0 {name=p16 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2025 -1320 0 0 {name=p51 sig_type=std_logic lab=VCC}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/VCDL_HD_v2p1.sym} 2025 -1280 0 0 {name=x11}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/BUFFMIN_v1p2.sym} 2095 -1290 0 0 {name=X12}
-C {devices/lab_pin.sym} 2170 -1230 3 0 {name=p52 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2170 -1350 1 0 {name=p53 sig_type=std_logic lab=VDD}
-C {devices/vsource.sym} 1685 -1565 0 0 {name=VCC value=1.8}
-C {devices/gnd.sym} 1685 -1515 0 0 {name=l5 lab=GND}
-C {devices/lab_wire.sym} 1685 -1645 0 0 {name=l8 sig_type=std_logic lab=VCC}
-C {devices/lab_pin.sym} 1955 -1270 2 1 {name=p13 sig_type=std_logic lab=VCONTs}
-C {devices/lab_pin.sym} 1955 -1290 0 0 {name=p14 sig_type=std_logic lab=V_1s_buff}
-C {devices/lab_pin.sym} 2225 -970 1 0 {name=p15 sig_type=std_logic lab=V_1r_dl}
-C {devices/lab_pin.sym} 2030 -920 0 0 {name=p50 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2030 -1000 0 0 {name=p54 sig_type=std_logic lab=VCC}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/VCDL_HD_v2p1.sym} 2030 -960 0 0 {name=x1}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/BUFFMIN_v1p2.sym} 2100 -970 0 0 {name=X13}
-C {devices/lab_pin.sym} 2175 -910 3 0 {name=p55 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 2175 -1030 1 0 {name=p56 sig_type=std_logic lab=VDD}
-C {devices/lab_pin.sym} 1960 -950 2 1 {name=p57 sig_type=std_logic lab=VCONTr}
-C {devices/lab_pin.sym} 1960 -970 0 0 {name=p58 sig_type=std_logic lab=V_1r_buff}
+C {devices/lab_pin.sym} 2310 -1095 1 0 {name=p37 sig_type=std_logic lab=V_1s_buff_sp}
+C {devices/lab_pin.sym} 2340 -1135 1 0 {name=p38 sig_type=std_logic lab=V_1r_buff_sp}
+C {devices/lab_pin.sym} 2690 -1115 1 0 {name=p39 sig_type=std_logic lab=DOUT}
+C {devices/lab_pin.sym} 2170 -1270 1 0 {name=p40 sig_type=std_logic lab=V_1s_buff_sp}
+C {devices/lab_pin.sym} 2170 -950 1 0 {name=p41 sig_type=std_logic lab=V_1r_buff_sp}
+C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/short_pulse_generator.sym} 2005 -970 0 0 {name=x8}
+C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/short_pulse_generator.sym} 2005 -1290 0 0 {name=x9}
+C {devices/lab_pin.sym} 2005 -1380 1 0 {name=p42 sig_type=std_logic lab=VDD}
+C {devices/lab_pin.sym} 2005 -1060 1 0 {name=p43 sig_type=std_logic lab=VDD}
+C {devices/lab_pin.sym} 2005 -1200 3 0 {name=p44 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 2005 -880 3 0 {name=p45 sig_type=std_logic lab=VSS}
+C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/SRlatch_NOR.sym} 2500 -1115 0 0 {name=x10}
+C {devices/lab_pin.sym} 2500 -1215 1 0 {name=p46 sig_type=std_logic lab=VDD}
+C {devices/lab_pin.sym} 2500 -1015 3 0 {name=p47 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 1870 -970 1 0 {name=p48 sig_type=std_logic lab=V_1r_buff}
+C {devices/lab_pin.sym} 1865 -1290 1 0 {name=p49 sig_type=std_logic lab=V_1s_buff}
+C {devices/lab_pin.sym} 2835 -1055 0 0 {name=p12 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} 2955 -1135 2 0 {name=p14 sig_type=std_logic lab=VCP}
+C {devices/lab_pin.sym} 2955 -1095 2 0 {name=p15 sig_type=std_logic lab=VCN}
+C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/NOL_v2p1.sym} 2835 -1115 0 0 {name=x1}
+C {devices/lab_wire.sym} 2835 -1175 0 0 {name=l5 sig_type=std_logic lab=VDIG}
+C {devices/lab_pin.sym} 1365 -620 2 1 {name=p11 sig_type=std_logic lab=VCP}
+C {devices/lab_pin.sym} 1365 -210 2 1 {name=p13 sig_type=std_logic lab=VCN}
