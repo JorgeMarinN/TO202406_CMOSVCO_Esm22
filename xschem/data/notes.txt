@@ -1,0 +1,4 @@
+wrdata /foss/designs/TO202406_CMOSVCO_Esm22/xschem/data/data_TDBuckTOP-CL_v5p3_RL12_signals.txt tran.v(vh) tran.v(ldo_out) tran.v(v_res) tran.v(d1) tran.v(d1_n) tran.v(V_1r_buff) tran.v(V_1s_buff) tran.v(DOUT) tran.i(v_res) tran.i(vh) tran.i(vldo_out)
+
+
+clkdlybuf4s50_2

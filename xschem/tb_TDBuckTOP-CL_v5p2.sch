@@ -53,17 +53,17 @@ lab=V_res}
 N 2320 -420 2420 -420 {
 lab=V_res}
 N 2320 -550 2320 -510 {
-lab=#net2}
+lab=VH}
 N 2320 -480 2340 -480 {
-lab=#net2}
+lab=VH}
 N 2340 -530 2340 -480 {
-lab=#net2}
+lab=VH}
 N 2320 -530 2340 -530 {
-lab=#net2}
+lab=VH}
 N 2250 -480 2280 -480 {
 lab=D1}
 N 2320 -570 2320 -550 {
-lab=#net2}
+lab=VH}
 N 2320 -340 2320 -300 {
 lab=VSS}
 N 2320 -370 2340 -370 {
@@ -76,7 +76,7 @@ N 2240 -370 2280 -370 {
 lab=D1_N}
 N 2320 -450 2320 -400 {
 lab=V_res}
-N 2320 -680 2320 -630 { lab=VH}
+N 2320 -620 2320 -570 { lab=VH}
 N 2795 -630 2795 -610 { lab=GND}
 N 2795 -740 2795 -690 { lab=VH}
 N 1555 -230 1585 -230 {
@@ -112,13 +112,13 @@ lab=VSS}
 N 2860 -200 2860 -160 {
 lab=GND}
 N 2860 -320 2860 -260 {
-lab=#net3}
+lab=#net2}
 N 2860 -420 2860 -380 {
 lab=ldo_out}
 N 2700 -360 2700 -310 {
 lab=ldo_out}
 N 3080 -300 3080 -240 {
-lab=#net4}
+lab=#net3}
 N 3080 -85 3080 -45 {
 lab=GND}
 N 3080 -400 3080 -360 {
@@ -177,27 +177,28 @@ spice_ignore=false
 place=header}
 C {devices/code_shown.sym} 3240 -1020 0 0 {name=s1 only_toplevel=false value=".param VDIG = 3.3
 .param VH = 3.3
-*113mA
-*.param RL = 26
-*93mA
-*.param RL = 32
-*82mA
-*.param RL = 39
-*57mA
-*.param RL = 52
-*29mA
-*.param RL = 104
-*14mA
-*.param RL = 208
-*LATEST TDBuckLOADS 
-*.param RL = 300
-.param RL = 15
+*LATEST TDBuckLOADS
+*300mA
+.param RL = 6
+*270mA
+*.param RL = 6.67
+*240mA
+*.param RL = 7.5
+*210mA
+*.param RL = 8.57
+*180mA
+*.param RL = 10
+*150mA
+*.param RL = 12
+*120mA
+*.param RL = 15
+*60mA
 *.param RL = 30
+*30mA
 *.param RL = 60
+*15mA
 *.param RL = 120
-*197mA
-*.param RL = 13
-.save v(ldo_out) v(v_res) v(D1) v(D1_N) v(DOUT) v(VCONTr) v(VCONTs) v(V_1r_buff) v(V_1s_buff) v(V_1r_buff_sp) v(V_1s_buff_sp) v(DOUT) i(v5) i(v_res) v(VCONTs_OL) v(vcp) v(vcn) i(vldo_out)
+.save v(ldo_out) v(v_res) v(D1) v(D1_N) v(DOUT) v(VCONTr) v(VCONTs) v(V_1r_buff) v(V_1s_buff) v(V_1r_buff_sp) v(V_1s_buff_sp) v(DOUT) v(vh) i(vh) i(v_res) v(VCONTs_OL) v(vcp) v(vcn) i(vldo_out) i(vvdig) i(vvdd)
 vvdd vdd 0 dc 3.3
 vvss vss 0 0
 vvcontr VCONTr 0 dc 0.45
@@ -214,8 +215,9 @@ vvcontr VCONTr 0 dc 0.45
 
 .control
 *tran 2n 1m
-tran 4n 250u
+tran 4n 300u
 *wrdata /foss/designs/TO202406_CMOSVCO_Esm22/xschem/data/dataVSENS_2xCMOSVCOnDFF_v1p1.txt v(V_1s) tran1.v(V_1s) tran2.v(V_1s) tran3.v(V_1s) tran4.v(V_1s) tran5.v(V_1s) tran6.v(V_1s) tran7.v(V_1s) tran8.v(V_1s) tran9.v(V_1s) tran10.v(V_1s) tran11.v(V_1s) tran12.v(V_1s) tran13.v(V_1s) tran14.v(V_1s) tran15.v(V_1s) tran16.v(V_1s) tran17.v(V_1s) tran18.v(V_1s) tran19.v(V_1s)
+wrdata /foss/designs/TO202406_CMOSVCO_Esm22/xschem/data/data_TDBuckTOP-CL_v5p2_RL6.txt tran.v(vh) tran.i(vh) tran.v(ldo_out) tran.i(vldo_out) tran.i(vvdig) tran.i(vvdd)
 plot v(ldo_out)
 plot v(v_res)
 plot v(D1) v(D1_N)+5
@@ -285,8 +287,7 @@ sa=0 sb=0 sd=0
 model=nfet_g5v0d10v5
 spiceprefix=X
 }
-C {devices/vsource.sym} 2320 -600 0 0 {name=V5 value=0}
-C {devices/lab_wire.sym} 2320 -680 0 0 {name=l18 sig_type=std_logic lab=VH}
+C {devices/lab_wire.sym} 2320 -620 0 0 {name=l18 sig_type=std_logic lab=VH}
 C {devices/lab_wire.sym} 2320 -300 2 0 {name=l20 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 2250 -480 0 0 {name=l21 sig_type=std_logic lab=D1
 }
@@ -313,7 +314,7 @@ C {devices/lab_pin.sym} 1905 -250 0 1 {name=l36 sig_type=std_logic lab=VH
 }
 C {LS_FINAL.sym} 1735 -620 0 0 {name=x4}
 C {LS_FINAL.sym} 1735 -210 0 0 {name=x5}
-C {devices/vsource.sym} 2905 -660 0 0 {name=V8 value=\{VDIG\}}
+C {devices/vsource.sym} 2905 -660 0 0 {name=VVDIG value=\{VDIG\}}
 C {devices/gnd.sym} 2905 -610 0 0 {name=l1 lab=GND}
 C {devices/lab_wire.sym} 2905 -740 0 0 {name=l2 sig_type=std_logic lab=VDIG}
 C {devices/capa.sym} 2700 -280 0 0 {name=C4
