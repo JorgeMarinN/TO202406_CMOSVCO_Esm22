@@ -1,0 +1,11 @@
+** sch_path: /home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/LS_FINAL_IHP.sch
+**.subckt LS_FINAL_IHP VH VDD IN OUT VSS
+*.ipin IN
+*.iopin VDD
+*.iopin VH
+*.opin OUT
+*.iopin VSS
+XM2 OUT IN VDD VDD sg13_lv_pmos w=1.0u l=0.15u ng=1 m=5
+XM1 OUT IN VSS VSS sg13_hv_nmos w={w_M1} l={l_M1} ng=1 m={mult_M1}
+**.ends
+.end

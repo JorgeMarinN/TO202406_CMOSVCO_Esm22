@@ -41,11 +41,6 @@ N -380 80 -190 80 {
 lab=VCONT}
 C {devices/lab_pin.sym} -280 -50 1 0 {name=p13 sig_type=std_logic lab=VDD}
 C {devices/lab_pin.sym} -280 30 3 0 {name=p14 sig_type=std_logic lab=VSS}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} -310 -10 0 0 {name=x1}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} -120 -10 0 0 {name=x2}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 70 -10 0 0 {name=x3}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 260 -10 0 0 {name=x4}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 450 -10 0 0 {name=x5}
 C {devices/lab_pin.sym} -420 80 1 0 {name=p1 sig_type=std_logic lab=VCONT}
 C {devices/lab_pin.sym} -220 -20 1 0 {name=p2 sig_type=std_logic lab=V_1}
 C {devices/lab_pin.sym} -30 -20 1 0 {name=p3 sig_type=std_logic lab=V_2}
@@ -57,3 +52,8 @@ C {devices/iopin.sym} -325 -160 3 0 {name=p8 lab=VDD}
 C {devices/iopin.sym} -275 -210 1 0 {name=p9 lab=VSS}
 C {devices/opin.sym} -220 -170 0 0 {name=p10 lab=V_1}
 C {devices/opin.sym} -220 -140 0 0 {name=p11 lab=V_2}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} -310 -10 0 0 {name=x1}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} -120 -10 0 0 {name=x2}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 70 -10 0 0 {name=x3}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 260 -10 0 0 {name=x4}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/stage_v2p1.sym} 450 -10 0 0 {name=x5}

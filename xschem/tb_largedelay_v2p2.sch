@@ -5,16 +5,9 @@ K {}
 V {}
 S {}
 E {}
-N 1050 -180 1190 -180 {
+N 290 130 430 130 {
 lab=VOUT}
-N 410 -160 500 -160 {
-lab=VOUT1}
-C {devices/code_shown.sym} 20 50 0 0 {name=LIB1 only_toplevel=false value="
-.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice TT
-.include /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
-"}
-C {devices/code_shown.sym} 20 170 0 0 {name=CODE only_toplevel=false value="
-.option scale=1e-6
+C {devices/code_shown.sym} 580 -220 0 0 {name=CODE only_toplevel=false value="
 .save v(vin) v(vout) 
 .control
 tran 10n 36u
@@ -24,32 +17,43 @@ plot v(vin) v(vout)+2
 
 .measure tran tdelay
 + TRIG tran1.V(VIN) TD=0u VAL=0.9 RISE=1
-+ TARG tran1.V(VOUT) TD=0u VAL=0.9 RISE=1
++ TARG tran1.V(VOUT) TD=0u VAL=1.65 RISE=1
 
 
 "}
-C {devices/vsource.sym} -160 -110 0 0 {name=VCC value=1.8}
+C {devices/vsource.sym} -160 -110 0 0 {name=VCC value=1.2}
 C {devices/vsource.sym} -240 -110 0 0 {name=VSS value=0}
 C {devices/gnd.sym} -240 -80 0 0 {name=l1 lab=GND}
 C {devices/gnd.sym} -160 -80 0 0 {name=l2 lab=GND}
-C {devices/vsource.sym} -240 -210 0 0 {name=VIN value="PULSE(0 1.8 11u 1n 1n 12u 24u)"}
+C {devices/vsource.sym} -240 -210 0 0 {name=VIN value="PULSE(0 1.2 11u 1n 1n 12u 24u)"}
 C {devices/lab_pin.sym} -240 -240 0 0 {name=p1 sig_type=std_logic lab=VIN}
 C {devices/lab_pin.sym} -240 -180 0 0 {name=p2 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -240 -140 0 0 {name=p3 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 110 -160 0 0 {name=p4 sig_type=std_logic lab=VIN}
-C {devices/lab_pin.sym} 290 -120 0 0 {name=p5 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} -10 110 0 0 {name=p4 sig_type=std_logic lab=VIN}
+C {devices/lab_pin.sym} -10 130 0 0 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} -160 -140 0 0 {name=p6 sig_type=std_logic lab=VCC}
-C {devices/lab_pin.sym} 1110 -180 1 0 {name=p8 sig_type=std_logic lab=VOUT}
-C {devices/capa.sym} 1190 -150 0 0 {name=C1
+C {devices/lab_pin.sym} 350 130 1 0 {name=p8 sig_type=std_logic lab=VOUT}
+C {devices/capa.sym} 430 160 0 0 {name=C1
 m=1
-value=10f
+value=10p
 footprint=1206
 device="ceramic capacitor"}
-C {devices/lab_pin.sym} 1190 -120 0 0 {name=p14 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 270 -200 0 0 {name=p7 sig_type=std_logic lab=VCC}
-C {devices/lab_pin.sym} 470 -160 1 0 {name=p11 sig_type=std_logic lab=VOUT1}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/large_delay_v1p1.sym} 230 -160 0 0 {name=x1}
-C {devices/lab_pin.sym} 680 -120 0 0 {name=p10 sig_type=std_logic lab=VSS}
-C {devices/lab_pin.sym} 660 -200 0 0 {name=p12 sig_type=std_logic lab=VCC}
-C {devices/lab_pin.sym} 800 -160 2 0 {name=p13 sig_type=std_logic lab=VOUT}
-C {/foss/designs/TO202406_CMOSVCO_Esm22/xschem/large_delay_v1p1.sym} 620 -160 0 0 {name=x2}
+C {devices/lab_pin.sym} 430 190 0 0 {name=p14 sig_type=std_logic lab=VSS}
+C {devices/lab_pin.sym} -10 90 0 0 {name=p7 sig_type=std_logic lab=VCC}
+C {/home/designer/shared/TO202406_CMOSVCO_Esm22/xschem/LS_FINAL_IHP.sym} 140 110 0 0 {name=x1}
+C {devices/vsource.sym} -60 -110 0 0 {name=VH value=3.3}
+C {devices/gnd.sym} -60 -80 0 0 {name=l3 lab=GND}
+C {devices/lab_pin.sym} -60 -140 0 0 {name=p9 sig_type=std_logic lab=VH}
+C {devices/lab_pin.sym} 290 90 0 1 {name=p15 sig_type=std_logic lab=VH}
+C {devices/code_shown.sym} 50 -220 0 0 {name=MODEL1 only_toplevel=true
+format="tcleval( @value )"
+value="
+
+.param corner=0
+
+.if (corner==0)
+.lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
+.lib $::SG13G2_MODELS/cornerRES.lib res_typ
+.lib $::SG13G2_MODELS/cornerCAP.lib cap_typ
+.endif
+"}
